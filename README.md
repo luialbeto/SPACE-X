@@ -1,36 +1,112 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Space-X
 
-## Getting Started
+Portal completo de lançamentos da SpaceX construído com Next.js 15.5.4, TypeScript, Tailwind CSS v4, e GraphQL.
 
-First, run the development server:
+![Next.js](https://img.shields.io/badge/Next.js-15.5.4-black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-v4-38bdf8)
+![License](https://img.shields.io/badge/license-MIT-green)
+
+## Características
+
+- **Next.js 15.5.4** com App Router e Turbopack
+- **Tailwind CSS v4** para estilização
+- **shadcn/ui** componentes acessíveis
+- **GraphQL** integração com API SpaceX
+- **React ARIA** para acessibilidade completa
+- **Infinite Scroll** com paginação invisível
+- **Atomic Design** pattern
+- **Totalmente Responsivo**
+- **Testes** com Jest e Cypress
+- **Docker** ambiente completo
+- **Error Boundary** tratamento de erros
+- **Context API** gerenciamento de estado
+- **Lazy Loading** otimização de performance
+
+## Pré-requisitos
+
+- Node.js 18
+- Docker
+- Git
+
+## Instalação
+
+### 1. Clone o repositório
+
+```
+git clone https://github.com/seu-usuario/spacex-portal.git
+cd spacex-portal
+```
+
+### 2. Instale as dependências
+
+```
+npm install
+```
+
+### 3. Configure as variáveis de ambiente
+
+Arquivo `.env.local` na raiz do projeto:
+
+```env
+NEXT_PUBLIC_GRAPHQL_ENDPOINT=https://main--spacex-l4uc6p.apollographos.net/graphql
+```
+
+## Desenvolvimento
+
+### Iniciar servidor de desenvolvimento
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Disponível em [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Iniciar com Docker
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+docker-compose up --build
+```
 
-## Learn More
+## Testes
 
-To learn more about Next.js, take a look at the following resources:
+### Testes Unitários (Jest)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+npm run test
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Testes E2E (Cypress)
 
-## Deploy on Vercel
+```
+npm run test:e2e
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Tecnologias
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Core
+- **Next.js 15.5.4**
+- **React 19**
+- **TypeScript**
+- **Turbopack**
+
+### Estilização
+- **Tailwind CSS v4**
+- **shadcn/ui**
+- **React ARIA**
+
+### Data Fetching
+- **GraphQL** 
+
+### Code Quality
+- **ESLint**
+
+### DevOps
+- **Docker** - Containerização
+- **Vercel** - Deploy e hosting
+
+## Estratégias de Renderização
+
+- **SSR (Server-Side Rendering)**: Página de detalhes do lançamento
+- **CSR (Client-Side Rendering)**: Infinite scroll no catálogo
+- **Static Generation**: Página inicial
