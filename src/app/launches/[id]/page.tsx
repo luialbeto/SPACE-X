@@ -1,7 +1,7 @@
 'use client';
 
 import { use, Suspense } from 'react';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import LaunchDetails from '@/components/organisms/launch-details';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
@@ -42,10 +42,11 @@ function LaunchDetailContent({ id }: { id: string }) {
   }
   if (!data?.launch) return <p>Launch not found.</p>;
 
+  // Create a rocket object from the launch data
   const rocket = {
     name: data.launch.rocket.rocket_name,
     type: data.launch.rocket.rocket_type,
-    description: '',
+    description: '', // Launch query doesn't have rocket description
   };
 
   return (
