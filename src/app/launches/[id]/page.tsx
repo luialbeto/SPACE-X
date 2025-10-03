@@ -30,8 +30,29 @@ const LAUNCH_DETAILS_QUERY = gql`
   }
 `;
 
+interface LaunchData {
+  launch: {
+    id: string;
+    mission_name: string;
+    details: string;
+    launch_date_local: string;
+    launch_success: boolean;
+    rocket: {
+      rocket_name: string;
+      rocket_type: string;
+    };
+    links: {
+      flickr_images: string[];
+      video_link: string;
+      wikipedia: string;
+      article_link: string;
+    };
+  };
+}
+
 function LaunchDetailContent({ id }: { id: string }) {
-  const { data, loading, error } = useQuery(LAUNCH_DETAILS_QUERY, {
+  const router = useRouter();
+  const { data, loading, error } = useQuery<LaunchData>(LAUNCH_DETAILS_QUERY, {
     variables: { id },
   });
 
@@ -42,21 +63,22 @@ function LaunchDetailContent({ id }: { id: string }) {
   }
   if (!data?.launch) return <p>Launch not found.</p>;
 
-  // Create a rocket object from the launch data
   const rocket = {
     name: data.launch.rocket.rocket_name,
     type: data.launch.rocket.rocket_type,
-    description: '', // Launch query doesn't have rocket description
+    description: '',
   };
 
   return (
     <div>
       <div className="container mx-auto p-4 max-w-4xl">
-        <Link href="/launches">
-          <Button variant="outline" className="mb-4">
-            ← Back to Launches
-          </Button>
-        </Link>
+        <Button 
+          variant="outline" 
+          className="mb-4"
+          onClick={() => router.push('/launches')}
+        >
+          ← Back to Launches
+        </Button>
       </div>
       <LaunchDetails launch={data.launch} rocket={rocket} />
     </div>

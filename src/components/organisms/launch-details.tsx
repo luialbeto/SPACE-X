@@ -6,9 +6,28 @@ import dynamic from 'next/dynamic';
 
 const LaunchVideo = dynamic(() => import('@/components/molecules/launch-video'), { ssr: false });
 
+interface Rocket {
+  name: string;
+  type: string;
+  description: string;
+}
+
+interface Launch {
+  mission_name: string;
+  details: string;
+  launch_date_local: string;
+  launch_success: boolean;
+  links?: {
+    flickr_images?: string[];
+    video_link?: string;
+    wikipedia?: string;
+    article_link?: string;
+  };
+}
+
 interface LaunchDetailsProps {
-  launch: any;
-  rocket: any;
+  launch: Launch;
+  rocket: Rocket;
 }
 
 export default function LaunchDetails({ launch, rocket }: LaunchDetailsProps) {
