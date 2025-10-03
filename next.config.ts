@@ -1,4 +1,4 @@
-import type { NextConfig } from 'next'
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   images: {
@@ -9,14 +9,26 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
+        hostname: '**.staticflickr.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'farm*.staticflickr.com',
+      },
+      {
+        protocol: 'https',
         hostname: 'live.staticflickr.com',
       },
       {
         protocol: 'https',
-        hostname: '*.flickr.com',
+        hostname: 'flickr.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.flickr.com',
       },
     ],
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;

@@ -1,8 +1,10 @@
 'use client';
 
-import { Suspense } from 'react';
+import { use, Suspense } from 'react';
+import Link from 'next/link';
 import LaunchDetails from '@/components/organisms/launch-details';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Button } from '@/components/ui/button';
 import { useQuery } from '@apollo/client/react';
 import { gql } from '@apollo/client';
 
@@ -11,12 +13,12 @@ const LAUNCH_DETAILS_QUERY = gql`
     launch(id: $id) {
       id
       mission_name
-      description
+      details
       launch_date_local
       launch_success
       rocket {
         rocket_name
-        rocket_type  # Fixed: Removed 'id' and 'description' (not on LaunchRocket)
+        rocket_type
       }
       links {
         flickr_images
@@ -24,14 +26,6 @@ const LAUNCH_DETAILS_QUERY = gql`
         wikipedia
         article_link
       }
-    }
-    rocket(id: $id) {  # Full Rocket type (has 'id', etc.)
-      id
-      name
-      type
-      description
-      wikipedia
-      flickr_images
     }
   }
 `;
@@ -42,15 +36,38 @@ function LaunchDetailContent({ id }: { id: string }) {
   });
 
   if (loading) return <p>Loading...</p>;
-  if (error || !data?.launch) return <p>Launch not found.</p>;
+  if (error) {
+    console.error('GraphQL Error:', error);
+    return <p>Launch not found.</p>;
+  }
+  if (!data?.launch) return <p>Launch not found.</p>;
 
-  return <LaunchDetails launch={data.launch} rocket={data.rocket} />;
+  const rocket = {
+    name: data.launch.rocket.rocket_name,
+    type: data.launch.rocket.rocket_type,
+    description: '',
+  };
+
+  return (
+    <div>
+      <div className="container mx-auto p-4 max-w-4xl">
+        <Link href="/launches">
+          <Button variant="outline" className="mb-4">
+            ← Back to Launches
+          </Button>
+        </Link>
+      </div>
+      <LaunchDetails launch={data.launch} rocket={rocket} />
+    </div>
+  );
 }
 
-export default function LaunchDetailsPage({ params }: { params: { id: string } }) {
+export default function LaunchDetailsPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params);
+  
   return (
     <Suspense fallback={<Skeleton className="w-full h-screen" />}>
-      <LaunchDetailContent id={params.id} />
+      <LaunchDetailContent id={id} />
     </Suspense>
   );
 }
