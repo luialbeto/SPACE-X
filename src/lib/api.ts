@@ -6,29 +6,26 @@ const LAUNCHES_QUERY = gql`
     launches(limit: $limit) {
       id
       mission_name
-      launch_date_local
-      launch_success
-      details
-      rocket {
-        rocket_name
-        rocket_type
-      }
-      links {
-        flickr_images
-        mission_patch
-        mission_patch_small
-        video_link
-        wikipedia
-        article_link
-      }
     }
   }
 `;
 
-export async function fetchLaunches(limit: number = 50) {
-  const { data } = await client.query({
+type Launch = {
+  id: string;
+  mission_name: string;
+};
+
+type LaunchesQuery = {
+  launches: Launch[];
+};
+
+export async function fetchLaunches(limit: number = 5): Promise<Launch[]> {
+  const { data } = await client.query<LaunchesQuery>({
     query: LAUNCHES_QUERY,
     variables: { limit },
   });
+  if (!data) {
+    throw new Error('Failed to fetch launches');
+  }
   return data.launches;
 }

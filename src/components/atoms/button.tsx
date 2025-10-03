@@ -5,6 +5,7 @@ import { useButton } from '@react-aria/button';
 import { useFocusRing } from '@react-aria/focus';
 import { mergeRefs } from '@react-aria/utils';
 import { Label } from '@/components/ui/label'; 
+import { useRef } from 'react';
 
 import { cn } from "@/lib/utils"
 
@@ -46,7 +47,11 @@ export interface ButtonProps
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, label, ...props }, ref) => {
-    const { buttonProps, isPressed } = useButton(props, ref);
+    const { formAction, onFocus, onBlur, onKeyDown, onKeyUp, onMouseDown, onMouseUp, value, ...ariaProps } = props;
+    const ariaValue = typeof value === 'string' ? value : undefined;
+
+    const internalRef = useRef<HTMLButtonElement>(null);
+    const { buttonProps, isPressed } = useButton({ ...ariaProps, value: ariaValue } as React.AriaAttributes & { value?: string }, internalRef); 
     const { focusProps, isFocusVisible } = useFocusRing();
 
     const Comp = asChild ? Slot : 'button';
@@ -62,7 +67,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             isPressed && 'pressed',
             isFocusVisible && 'focus'
           )}
-          ref={asChild ? undefined : mergeRefs(ref, (node) => buttonProps.ref?.(node))}
+          ref={asChild ? undefined : mergeRefs(ref, internalRef)}
           {...buttonProps}
           {...focusProps}
           {...props}
