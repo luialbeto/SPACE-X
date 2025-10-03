@@ -5,5 +5,8 @@ export default defineConfig({
     baseUrl: 'http://localhost:3000',
     setupNodeEvents(on, config) {
     },
+    supportFile: false,
+    video: false,
+    screenshotOnRunFailure: true,
   },
 });
