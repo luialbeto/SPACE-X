@@ -34,8 +34,8 @@ Portal completo de lançamentos da SpaceX construído com Next.js 15.5.4, TypeSc
 ### 1. Clone o repositório
 
 ```
-git clone https://github.com/seu-usuario/spacex-portal.git
-cd spacex-portal
+git clone [git@github.com:luialbeto/SPACE-X.git](https://github.com/luialbeto/SPACE-X.git)
+cd SPACE-X
 ```
 
 ### 2. Instale as dependências
@@ -44,23 +44,16 @@ cd spacex-portal
 npm install
 ```
 
-### 3. Configure as variáveis de ambiente
-
-Arquivo `.env.local` na raiz do projeto:
-
-```env
-NEXT_PUBLIC_GRAPHQL_ENDPOINT=https://main--spacex-l4uc6p.apollographos.net/graphql
-```
-
 ## Desenvolvimento
 
 ### Iniciar servidor de desenvolvimento
 
-```bash
+```
 npm run dev
 ```
-
 Disponível em [http://localhost:3000](http://localhost:3000)
+
+![alt text](<Screenshot from 2025-10-03 14-16-06-1.png>)
 
 ### Iniciar com Docker
 
@@ -73,14 +66,16 @@ docker-compose up --build
 ### Testes Unitários (Jest)
 
 ```
-npm run test
+npm test
 ```
+![alt text](<Screenshot from 2025-10-03 14-15-30.png>)
 
 ### Testes E2E (Cypress)
 
 ```
-npm run test:e2e
+npm run cypress:open
 ```
+![alt text](<Screenshot from 2025-10-03 14-12-24.png>)
 
 ## Tecnologias
 
@@ -107,6 +102,5 @@ npm run test:e2e
 
 ## Estratégias de Renderização
 
-- **SSR (Server-Side Rendering)**: Página de detalhes do lançamento
-- **CSR (Client-Side Rendering)**: Infinite scroll no catálogo
-- **Static Generation**: Página inicial
+- **SSR (Server-Side Rendering)**: HomePage; UI Components
+- **CSR (Client-Side Rendering)**: Infinite scroll no catálogo; Página de Lançamentos; 
